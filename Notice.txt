@@ -1,0 +1,48 @@
+Tout effectuer à la racine !
+
+1) Mettre à jour le système
+
+"sudo apt-get update"
+"sudo apt-get upgrade"
+
+2) Importer le programme et installation du capteur
+
+-> Mettre le fichier à la racine (\) et le nommer 'app.js'.
+-> Mettre le seq.json au même endroit si il existe.
+
+Brancher le capteur de température comme indiqué dans le schéma ci-joint.
+
+3) Installation de nodejs et des modules nécéssaires
+
+"sudo apt-get install nodejs npm"
+
+"sudo npm install -g node-gyp"
+
+"sudo npm install ed25519-supercop"
+"sudo npm install bittorrent-dht"
+"sudo npm install ds18x20"
+
+4) Configurer le système pour qu'il puisse détecter le capteur
+
+Ouvrir:
+"sudo nano /boot/config.txt"
+
+et y ajouter la ligne suivante à la fin:
+"dtoverlay=w1-gpio, gpiopin=4"
+
+"sudo reboot"
+
+5) Configurer le lancement automatique de l'app au démarage
+
+"sudo npm install forever -g"
+"sudo npm install forever-service -g"
+"sudo forever-service install myService"
+
+Ouvrir:
+"sudo nano /etc/rc.local"
+et y ajouter la ligne suivante avant le exit 0:
+"sudo service myService start"
+
+"sudo reboot"
+
+Le capteur devrait se mettre à diffuser automatique au démarage.
